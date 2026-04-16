@@ -1,0 +1,148 @@
+{
+  "$schema": "https://travelos.ai/schemas/agency-onboarding-v1.json",
+  "$comment": "TravelOS Agency Onboarding Payload — POST /api/agencies/onboard",
+
+  "agency": {
+    "name": "Sunshine Travel ЕООД",
+    "slug": "sunshine-travel",
+    "country": "BG",
+    "vat_number": "BG201234567",
+    "license_number": "РК-01-5421",
+    "logo_url": "https://cdn.sunshine-travel.bg/logo.png",
+    "brand_color": "#00e5b8",
+    "brand_voice": "Приятелски и топъл тон. Фокус върху семейни пакети. Подчертавай all-inclusive.",
+    "subscription_plan": "growth",
+    "admin_email": "admin@sunshine-travel.bg",
+    "admin_name": "Иван Петров"
+  },
+
+  "infobip": {
+    "api_key": "{{INFOBIP_API_KEY}}",
+    "base_url": "https://xyz123.api.infobip.com",
+    "verified_channels": {
+      "viber": {
+        "sender_id": "+35924123456",
+        "verified_name": "Sunshine Travel",
+        "sender_type": "ALPHA",
+        "status": "ACTIVE"
+      },
+      "whatsapp": {
+        "sender_id": "+35924654321",
+        "display_name": "Sunshine Travel",
+        "status": "ACTIVE"
+      },
+      "sms": {
+        "sender_id": "SUNSHINE",
+        "status": "ACTIVE"
+      }
+    },
+    "webhook_receive_url": "https://api.travelos.ai/webhooks/infobip",
+    "delivery_report_url": "https://api.travelos.ai/webhooks/infobip/delivery"
+  },
+
+  "stripe": {
+    "connect_account_id": "acct_1234567890",
+    "publishable_key": "pk_live_...",
+    "webhook_secret": "whsec_...",
+    "payment_methods": ["card", "apple_pay", "google_pay"],
+    "currency": "EUR"
+  },
+
+  "bank_transfer": {
+    "enabled": true,
+    "threshold_eur": 1000,
+    "bank_name": "UniCredit Bulbank",
+    "iban": "BG80 UNCR 9660 1011 3424 01",
+    "swift": "UNCRBGSF",
+    "beneficiary": "Sunshine Travel ЕООД",
+    "webhook_secret": "{{BANK_WEBHOOK_SECRET}}",
+    "reference_format": "booking_ref"
+  },
+
+  "meta_ads": {
+    "business_id": "1234567890",
+    "ad_account_id": "act_9876543210",
+    "pixel_id": "345678901234",
+    "access_token": "{{META_ACCESS_TOKEN}}",
+    "auto_post_rules": {
+      "enabled": true,
+      "trigger": "price_update_lower_than_competitor",
+      "budget_per_post_eur": 25,
+      "target_audience": {
+        "countries": ["BG"],
+        "age_min": 25,
+        "age_max": 55,
+        "interests": ["travel", "vacation", "beach_holiday"]
+      }
+    }
+  },
+
+  "pricing": {
+    "default_min_margin_pct": 3.0,
+    "default_target_margin_pct": 10.0,
+    "price_war_discount_pct": 0.5,
+    "competitor_check_interval_minutes": 30,
+    "cms_auto_sync": true,
+    "cms_api_url": "https://sunshine-travel.bg/wp-json/travelos/v1",
+    "cms_api_key": "{{CMS_API_KEY}}"
+  },
+
+  "vendors": [
+    {
+      "name": "Абакс Холидейс",
+      "feed_url": "https://feed.abax.bg/xml/sunshine-travel",
+      "feed_type": "xml",
+      "auth_token": "{{ABAX_TOKEN}}",
+      "sync_interval_minutes": 60
+    },
+    {
+      "name": "Coris Travel",
+      "feed_url": "https://api.coris.bg/offers",
+      "feed_type": "json",
+      "auth_token": "{{CORIS_TOKEN}}",
+      "sync_interval_minutes": 60
+    }
+  ],
+
+  "ai_routing": {
+    "general_chat_model": "gpt-4o-mini",
+    "complex_planning_model": "claude-sonnet-4-20250514",
+    "marketing_analysis_model": "gemini-1.5-pro",
+    "language": "bg",
+    "max_response_tokens": 1000
+  },
+
+  "notifications": {
+    "supervisor_email": "manager@sunshine-travel.bg",
+    "supervisor_viber": "+359881234567",
+    "alerts": {
+      "margin_below_floor": true,
+      "payment_received": true,
+      "voucher_issued": true,
+      "liquidity_deficit": true,
+      "new_lead": false
+    }
+  },
+
+  "financial": {
+    "liquidity_check_day": 15,
+    "vendor_payment_day": 15,
+    "default_currency": "EUR",
+    "vat_rate_pct": 20
+  },
+
+  "onboarding_metadata": {
+    "schema_version": "1.0",
+    "submitted_at": "2025-04-15T10:00:00Z",
+    "submitted_by": "admin@sunshine-travel.bg",
+    "status": "pending_verification",
+    "verification_steps": [
+      { "step": "infobip_sender_verify",  "status": "completed" },
+      { "step": "stripe_connect",         "status": "completed" },
+      { "step": "bank_iban_verify",       "status": "pending"   },
+      { "step": "meta_ads_authorize",     "status": "pending"   },
+      { "step": "vendor_feed_test",       "status": "pending"   },
+      { "step": "cms_api_test",           "status": "pending"   }
+    ]
+  }
+}

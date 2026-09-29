@@ -114,7 +114,7 @@ export default function TravelOSUltimate() {
       {/* HEADER: ХРИСИ & ПРЕВОД */}
       <div style={{ background: T.surf, borderBottom: `1px solid ${T.border}`, padding: "0 20px", height: 52, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <div style={{ width: 30, height: 30, borderRadius: 8, background: accent, color: "#000", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900 }}>T</div>
+          <div style={{ width: 30, height: 30, borderRadius: 8, background: acc, color: "#000", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900 }}>T</div>
           <div style={{ fontSize: 14, fontWeight: 800 }}>TravelOS Pro 5.1</div>
           <div style={{ width: 1, height: 20, background: T.border }} />
           <div style={{ fontSize: 11 }}>Добре дошла, <strong>Хриси</strong>! <span style={{ opacity: 0.5 }}>| Тикет #TOS-8821</span></div>
@@ -156,7 +156,7 @@ export default function TravelOSUltimate() {
 
         {/* CENTER TABS */}
         <div style={{ borderRight: `1px solid ${T.border}`, overflowY: "auto" }}>
-           {tab === "agent" && <AgentPanel offer={offer} bookingRef={bookingRef} status={status} approved={approved} payState={payState} voucherDone={voucherDone} phase={phase} onOpenIntake={() => {}} onApprove={() => setApproved(true)} accent={acc} />}
+           {tab === "agent" && <AgentPanel offer={offer} bookingRef={bookingRef} status={status} approved={approved} payState={payState} voucherDone={voucherDone} onOpenIntake={() => {}} onApprove={() => setApproved(true)} accent={acc} />}
            {tab === "operations" && <OperationsView accent={acc} onLog={addLog} />}
            {tab === "marketing" && <MarketingPanel accent={acc} metaConnected={false} onConnectMeta={() => {}} />}
            {tab === "cdp" && <CDPView accent={acc} />}
